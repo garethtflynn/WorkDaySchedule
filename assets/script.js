@@ -1,6 +1,6 @@
 // variables  
 var saveBtn = document.querySelector('.saveBtn');
-var eventName = document.getElementsByClassName('row')//class row 
+var eventName = document.getElementsByClassName('row') //class row 
 var eventNine = document.getElementById ('hourNine')
 var eventTen = document.getElementById ('hourTen')
 var eventEleven = document.getElementById ('hourEleven')
@@ -22,7 +22,7 @@ $('#currentDay').text(currentDay)
 
 
 
-var readData = JSON.parse(localStorage.getItem('eventSaved')) // rename var
+var readData = JSON.parse(localStorage.getItem('eventSaved')) 
 var savedData = {}
 
 if (readData !== null) {
@@ -53,6 +53,8 @@ function saveEvent (event) {
 }
 
 // get the event to display in the corresponding row/hour after page is refreshed
+
+
 function displayEvent(event) {
     eventNine.value = event.nineAm
     eventTen.value = event.tenAm
@@ -65,11 +67,14 @@ function displayEvent(event) {
     eventFive.value = event.fivePm
 }
 
+
+
 $('.saveBtn').click(saveEvent)
 
  // When the init function is executed, the code inside showEvent function will also execute
 function init() {
  displayEvent(savedData);
-  }
+}
+  
   init();
 
