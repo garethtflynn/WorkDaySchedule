@@ -1,6 +1,6 @@
 // variables  
 var saveBtn = document.querySelector('.saveBtn');
-var eventName = document.getElementsByClassName('row') //class row 
+var eventName = document.getElementsByClassName('row') 
 var eventNine = document.getElementById ('hourNine')
 var eventTen = document.getElementById ('hourTen')
 var eventEleven = document.getElementById ('hourEleven')
@@ -25,12 +25,6 @@ $('#currentDay').text(currentDay)
 var readData = JSON.parse(localStorage.getItem('eventSaved')) 
 var savedData = {}
 
-if (readData !== null) {
-    savedData = readData
-} 
-
-var arr = [{hour: 9, value: 'meeting'}, {hour: 10, value: 'coffee'}] // reference
-
 // if statements corresponding to present now or future 
 displayColor.each(function(i){
         // if moment == past classList.add('past')
@@ -43,6 +37,7 @@ displayColor.each(function(i){
 
 //setting event to local storage
 function saveEvent (event) { 
+    // some console log to make sure its logging accurately
         console.log(event.target)
         console.log($(event.target).siblings('input'))
         console.log($(event.target).siblings('input').val())
@@ -52,29 +47,30 @@ function saveEvent (event) {
         localStorage.setItem('eventSaved', JSON.stringify(savedData));
 }
 
+
 // get the event to display in the corresponding row/hour after page is refreshed
-
-
 function displayEvent(event) {
-    eventNine.value = event.nineAm
-    eventTen.value = event.tenAm
-    eventEleven.value = event.elevenAm 
-    eventTwelve.value = event.twelvePm
-    eventOne.value = event.onePm
-    eventTwo.value = event.twoPm
-    eventThree.value = event.threePm
-    eventFour.value = event.fourPm
-    eventFive.value = event.fivePm
+// when pulling from empty object, display event or if it the corresponding hour is empty, display 'Event'
+    eventNine.value = event.nineAm || 'Event'
+    eventTen.value = event.tenAm || 'Event'
+    eventEleven.value = event.elevenAm || 'Event'
+    eventTwelve.value = event.twelvePm || 'Event'
+    eventOne.value = event.onePm || 'Event'
+    eventTwo.value = event.twoPm || 'Event'
+    eventThree.value = event.threePm || 'Event'
+    eventFour.value = event.fourPm || 'Event'
+    eventFive.value = event.fivePm || 'Event'
 }
-
-
 
 $('.saveBtn').click(saveEvent)
 
  // When the init function is executed, the code inside showEvent function will also execute
 function init() {
- displayEvent(savedData);
+    if (readData !== null) {
+        savedData = readData
+        displayEvent(savedData);
+    } 
 }
   
-  init();
+ init();
 
